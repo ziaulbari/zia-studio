@@ -1,0 +1,307 @@
+/* ==========================================
+   ZIA STUDIO - PREMIUM CYBERPUNK STYLING
+   ========================================== */
+
+:root {
+    --bg-dark: #0d0d11;
+    --panel-bg: #14141f;
+    --neon-cyan: #00f2fe;
+    --neon-purple: #9d4edd;
+    --text-main: #f8f9fa;
+    --text-muted: #8e92a2;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Rajdhani', 'Orbitron', sans-serif;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    overflow-x: hidden;
+    height: 100vh;
+}
+
+/* MAIN LAYOUT SPLIT-SCREEN */
+.app-container {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+}
+
+/* LEFT CONTROL PANEL */
+.control-panel {
+    width: 40%;
+    background-color: var(--panel-bg);
+    padding: 30px;
+    border-right: 2px solid rgba(0, 242, 254, 0.2);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.5);
+}
+
+.logo {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    font-size: 2.5rem;
+    color: #fff;
+    text-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan);
+    letter-spacing: 2px;
+}
+
+.tagline {
+    font-size: 0.95rem;
+    color: var(--neon-purple);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-top: -15px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+/* FORM ELEMENTS & INPUTS */
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input-row {
+    display: flex;
+    gap: 15px;
+}
+
+.input-row .input-group {
+    flex: 1;
+}
+
+label {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+textarea, select, input[type="file"] {
+    background: #1c1c28;
+    border: 1px solid rgba(157, 78, 221, 0.3);
+    border-radius: 6px;
+    color: var(--text-main);
+    padding: 12px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+textarea {
+    height: 120px;
+    resize: none;
+}
+
+textarea:focus, select:focus {
+    outline: none;
+    border-color: var(--neon-cyan);
+    box-shadow: 0 0 10px rgba(0, 242, 254, 0.3);
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    background: #1c1c28;
+    height: 6px;
+    border-radius: 3px;
+    outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--neon-cyan);
+    cursor: pointer;
+    box-shadow: 0 0 10px var(--neon-cyan);
+}
+
+/* THE NEON BUTTON */
+.neon-btn {
+    background: transparent;
+    border: 2px solid var(--neon-purple);
+    color: #fff;
+    padding: 15px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-shadow: 0 0 5px #fff;
+    box-shadow: 0 0 10px rgba(157, 78, 221, 0.2);
+    margin-top: 10px;
+}
+
+.neon-btn:hover {
+    background: var(--neon-purple);
+    box-shadow: 0 0 20px var(--neon-purple), 0 0 40px var(--neon-purple);
+}
+
+/* RIGHT PREVIEW PANEL */
+.preview-panel {
+    width: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    background: radial-gradient(circle, #1a1a2e 0%, #0d0d11 100%);
+}
+
+.canvas-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 850px;
+    aspect-ratio: 16/9;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 15px rgba(0, 242, 254, 0.1);
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+canvas {
+    width: 100%;
+    height: 100%;
+    background: #000;
+    display: block;
+}
+
+/* LOADING & OVERLAY SCREEN */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(13, 13, 17, 0.9);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    z-index: 10;
+    transition: all 0.3s ease;
+}
+
+.loader {
+    width: 60px;
+    height: 60px;
+    border: 4px solid #1c1c28;
+    border-top: 4px solid var(--neon-cyan);
+    border-bottom: 4px solid var(--neon-purple);
+    border-radius: 50%;
+    animation: spin 1.5s linear infinite;
+}
+
+.progress-bar {
+    width: 60%;
+    height: 8px;
+    background: #1c1c28;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+#progressFill {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple));
+    box-shadow: 0 0 10px var(--neon-cyan);
+    transition: width 0.1s linear;
+}
+
+/* DOWNLOAD POPUP WINDOW */
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+.popup-content {
+    background: var(--panel-bg);
+    border: 2px solid var(--neon-cyan);
+    box-shadow: 0 0 30px rgba(0, 242, 254, 0.3);
+    padding: 40px;
+    border-radius: 12px;
+    text-align: center;
+    max-width: 500px;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.popup-content h2 {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--neon-cyan);
+    text-shadow: 0 0 10px rgba(0, 242, 254, 0.5);
+}
+
+.neon-btn.download {
+    border-color: var(--neon-cyan);
+}
+
+.neon-btn.download:hover {
+    background: var(--neon-cyan);
+    color: #000;
+    box-shadow: 0 0 20px var(--neon-cyan);
+}
+
+.clean-message {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: rgba(255, 0, 0, 0.05);
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+.clean-message p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.trash-icon {
+    animation: shake 2s infinite;
+}
+
+/* UTILITY CLASSES */
+.hidden {
+    display: none !important;
+}
+
+/* ANIMATIONS */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes shake {
+    0%, 100% { transform: rotate(0deg); }
+    20% { transform: rotate(-10deg); }
+    40% { transform: rotate(10deg); }
+    60% { transform: rotate(-10deg); }
+    80% { transform: rotate(10deg); }
+}

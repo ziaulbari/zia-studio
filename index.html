@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zia Studio - Neon Script-to-Video</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;900&family=Rajdhani:wght@600&family=Caveat:wght@700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ffmpeg/0.11.6/ffmpeg.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <div class="control-panel">
+            <h1 class="logo">ZIA STUDIO</h1>
+            <p class="tagline">Neon Script-to-Video Engine</p>
+            
+            <div class="input-group">
+                <label>Write Your Script / Poetry</label>
+                <textarea id="scriptText" placeholder="Yahan apni shayari ya kahani likhein..."></textarea>
+            </div>
+
+            <div class="input-row">
+                <div class="input-group">
+                    <label>Font Style</label>
+                    <select id="fontStyle">
+                        <option value="Orbitron">Cyber Sci-Fi</option>
+                        <option value="Rajdhani">Modern Tech</option>
+                        <option value="Caveat">Classic Poetry</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Particle Effect</label>
+                    <select id="particleEffect">
+                        <option value="fireflies">Fireflies Glow</option>
+                        <option value="rain">Matrix Cyber Rain</option>
+                        <option value="smoke">Smoke Dissolve</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Background Image</label>
+                <input type="file" id="bgImage" accept="image/*">
+                <select id="imageMotion">
+                    <option value="zoomIn">Cinematic Zoom In</option>
+                    <option value="zoomOut">Cinematic Zoom Out</option>
+                    <option value="panLeft">Slow Pan Left</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label>Background Music (MP3)</label>
+                <input type="file" id="bgMusic" accept="audio/mp3">
+            </div>
+
+            <div class="input-group">
+                <label>Video Duration: <span id="durationVal">15s</span></label>
+                <input type="range" id="durationSlider" min="5" max="120" value="15">
+            </div>
+
+            <button id="generateBtn" class="neon-btn">🎬 GENERATE MP4 VIDEO</button>
+        </div>
+
+        <div class="preview-panel">
+            <div class="canvas-wrapper">
+                <canvas id="videoCanvas" width="1280" height="720"></canvas>
+                
+                <div id="renderOverlay" class="overlay hidden">
+                    <div class="loader"></div>
+                    <h2 id="statusText">Processing Media...</h2>
+                    <div class="progress-bar"><div id="progressFill"></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="downloadPopup" class="popup hidden">
+        <div class="popup-content">
+            <h2>✨ Video Ready For PC!</h2>
+            <p>Aapki video browser memory mein render ho chuki hai.</p>
+            <button id="downloadBtn" class="neon-btn download">📥 DOWNLOAD MP4 TO PC</button>
+            <div class="clean-message">
+                <span class="trash-icon">🧹</span> 
+                <p>Auto-Cleaning browser temporary logs to protect your storage space...</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

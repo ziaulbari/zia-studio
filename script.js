@@ -1,5 +1,5 @@
 /* ========================================================
-   ZIA STUDIO - CORE MULTIMEDIA & FIXED UNIVERSAL MP4 ENGINE
+   ZIA STUDIO - UNIVERSAL HIGH-COMPATIBILITY VIDEO ENGINE
    ======================================================== */
 
 const scriptTextInput = document.getElementById('scriptText');
@@ -172,7 +172,7 @@ function drawPreviewFrame(timeRatio) {
     ctx.shadowBlur = 0;
 }
 
-// UNIVERSAL STANDARD MP4 ENCODER
+// STABLE WEBM ENCODER
 generateBtn.addEventListener('click', async () => {
     const text = scriptTextInput.value;
     if (!text) {
@@ -182,7 +182,7 @@ generateBtn.addEventListener('click', async () => {
 
     renderOverlay.classList.remove('hidden');
     progressFill.style.width = '0%';
-    statusText.textContent = "Standard MP4 Stream Initialize Ho Rahi Hai...";
+    statusText.textContent = "Video Stream Encode Ho Raha Hai...";
 
     const duration = parseInt(durationSlider.value);
     const font = fontStyleSelect.value;
@@ -191,18 +191,7 @@ generateBtn.addEventListener('click', async () => {
     initializeParticles(text, font, effect);
 
     const stream = canvas.captureStream(30); 
-    
-    // Windows aur Mobile ke liye sabse behtareen standard codec fallback
-    let options = { mimeType: 'video/mp4;codecs=avc1.42E01E,mp4a.40.2' };
-    try {
-        if (!MediaRecorder.isTypeSupported(options.mimeType)) {
-            options = { mimeType: 'video/mp4' };
-        }
-    } catch(e) {
-        options = { mimeType: '' }; // Fallback system default
-    }
-
-    const mediaRecorder = new MediaRecorder(stream, options);
+    const mediaRecorder = new MediaRecorder(stream, { mimeType: 'video/webm;codecs=vp9' });
     const chunks = [];
 
     mediaRecorder.ondataavailable = (e) => {
@@ -210,7 +199,7 @@ generateBtn.addEventListener('click', async () => {
     };
 
     mediaRecorder.onstop = () => {
-        generatedVideoBlob = new Blob(chunks, { type: 'video/mp4' });
+        generatedVideoBlob = new Blob(chunks, { type: 'video/webm' });
         statusText.textContent = "Video Successfully Rendered!";
         setTimeout(() => {
             renderOverlay.classList.add('hidden');
@@ -238,7 +227,7 @@ generateBtn.addEventListener('click', async () => {
             currentFrame++;
             const percent = Math.floor((currentFrame / totalFrames) * 100);
             progressFill.style.width = percent + '%';
-            statusText.textContent = `Rendering MP4 Video Components... ${percent}%`;
+            statusText.textContent = `Rendering Video Components... ${percent}%`;
             
             requestAnimationFrame(renderLoop);
         } else {
@@ -249,13 +238,13 @@ generateBtn.addEventListener('click', async () => {
     renderLoop();
 });
 
-// CLEAN REFRESH DOWNLOAD PROTOCOL
+// DOWNLOAD PROTOCOL
 downloadBtn.addEventListener('click', () => {
     if (!generatedVideoBlob) return;
 
     const url = URL.createObjectURL(generatedVideoBlob);
     const link = document.createElement('a');
-    link.download = 'zia_studio_video.mp4'; // Pure MP4 output
+    link.download = 'zia_studio_video.webm'; 
     link.href = url;
     document.body.appendChild(link);
     link.click();
@@ -269,6 +258,6 @@ downloadBtn.addEventListener('click', () => {
         bgImageInput.value = '';
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         downloadPopup.classList.add('hidden');
-        alert("漏 Storage Wiped: Browser logs cleared safely!");
+        alert("🧹 Storage Wiped: Browser logs cleared safely!");
     }, 500);
 });

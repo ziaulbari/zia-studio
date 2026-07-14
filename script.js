@@ -260,4 +260,4 @@ downloadBtn.addEventListener('click', () => {
         downloadPopup.classList.add('hidden');
         alert("🧹 Storage Wiped: Browser logs cleared safely!");
     }, 500);
-});
+}); 
